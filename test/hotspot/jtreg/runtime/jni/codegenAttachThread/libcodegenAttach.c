@@ -33,6 +33,10 @@
 
 #if defined(__APPLE__) && defined(__aarch64__)
 
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+
 #include <pthread.h>
 #include <sys/mman.h>
 
@@ -111,6 +115,16 @@ Java_TestCodegenAttach_testCodegenAttach
     exit(1);
   }
 }
+#else
+
+JNIEXPORT void JNICALL
+Java_TestCodegenAttach_testCodegenAttach
+(JNIEnv *env, jclass cls) {
+  printf("should not reach here\n");
+  exit(1);
+}
+
+#endif
 
 #else
 
