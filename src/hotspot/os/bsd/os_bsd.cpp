@@ -1700,9 +1700,13 @@ bool os::remove_stack_guard_pages(char* addr, size_t size) {
 // may not start from the requested address. Unlike Bsd mmap(), this
 // function returns NULL to indicate failure.
 static char* anon_mmap(char* requested_addr, size_t bytes, bool exec) {
-  // MAP_FIXED is intentionally left out, to leave existing mappings intact.
+  // MAP_FIXED is intentionally left out, to leave existing mappings intact
+#ifdef ZERO
   const int flags = MAP_PRIVATE | MAP_NORESERVE | MAP_ANONYMOUS
       MACOS_ONLY(| (exec ? MAP_JIT : 0));
+#else
+  const int flags = MAP_PRIVATE | MAP_NORESERVE | MAP_ANONYMOUS;
+#endif
 
   // Map reserved/uncommitted pages PROT_NONE so we fail early if we
   // touch an uncommitted page. Otherwise, the read/write might
