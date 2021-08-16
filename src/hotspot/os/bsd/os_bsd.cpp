@@ -1701,7 +1701,7 @@ bool os::remove_stack_guard_pages(char* addr, size_t size) {
 // function returns NULL to indicate failure.
 static char* anon_mmap(char* requested_addr, size_t bytes, bool exec) {
   // MAP_FIXED is intentionally left out, to leave existing mappings intact
-#ifdef ZERO
+#ifndef ZERO
   const int flags = MAP_PRIVATE | MAP_NORESERVE | MAP_ANONYMOUS
       MACOS_ONLY(| (exec ? MAP_JIT : 0));
 #else
