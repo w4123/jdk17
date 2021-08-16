@@ -432,6 +432,9 @@ void setUserHome(java_props_t *sprops) {
  * Method for fetching proxy info and storing it in the property list.
  */
 void setProxyProperties(java_props_t *sProps) {
+  
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+  
     if (sProps == NULL) return;
 
     char buf[16];    /* Used for %d of an int - 16 is plenty */
@@ -504,4 +507,7 @@ void setProxyProperties(java_props_t *sProps) {
 #undef CHECK_PROXY
 
     CFRelease(dict);
+  
+#endif
+  
 }
