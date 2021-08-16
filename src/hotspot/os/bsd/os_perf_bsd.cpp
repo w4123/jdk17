@@ -30,7 +30,10 @@
 #include CPU_HEADER(vm_version_ext)
 
 #ifdef __APPLE__
-  #import <libproc.h>
+  #include <TargetConditionals.h>
+  #if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+    #import <libproc.h>
+  #endif
   #include <sys/time.h>
   #include <sys/sysctl.h>
   #include <mach/mach.h>
@@ -286,6 +289,7 @@ int SystemProcessInterface::SystemProcesses::system_processes(SystemProcess** sy
   assert(system_processes != NULL, "system_processes pointer is NULL!");
   assert(no_of_sys_processes != NULL, "system_processes counter pointer is NULL!");
 #ifdef __APPLE__
+  #if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
   pid_t* pids = NULL;
   int pid_count = 0;
   ResourceMark rm;
@@ -342,6 +346,9 @@ int SystemProcessInterface::SystemProcesses::system_processes(SystemProcess** sy
   *system_processes = next;
 
   return OS_OK;
+  #else
+  return FUNCTIONALITY_NOT_IMPLEMENTED;
+  #endif
 #endif
   return FUNCTIONALITY_NOT_IMPLEMENTED;
 }
