@@ -146,7 +146,6 @@ module java.base {
         jdk.compiler,
         jdk.jshell;
     exports jdk.internal.access to
-        java.desktop,
         java.logging,
         java.management,
         java.naming,
@@ -189,7 +188,6 @@ module java.base {
     exports jdk.internal.org.xml.sax.helpers to
         jdk.jfr;
     exports jdk.internal.misc to
-        java.desktop,
         java.logging,
         java.management,
         java.naming,
@@ -213,7 +211,6 @@ module java.base {
         jdk.jartool,
         jdk.jfr,
         jdk.jlink,
-        jdk.jpackage,
         jdk.incubator.foreign;
     exports jdk.internal.perf to
         java.management,
@@ -223,7 +220,6 @@ module java.base {
         jdk.management,
         jdk.jfr;
     exports jdk.internal.ref to
-        java.desktop,
         jdk.incubator.foreign;
     exports jdk.internal.reflect to
         java.logging,
@@ -264,9 +260,7 @@ module java.base {
         java.security.jgss,
         jdk.naming.dns;
     exports sun.net.util to
-        java.desktop,
         java.net.http,
-        jdk.jconsole,
         jdk.sctp;
     exports sun.net.www to
         java.net.http,
@@ -285,17 +279,13 @@ module java.base {
         jdk.net;
     exports sun.reflect.annotation to
         jdk.compiler;
-    exports sun.reflect.generics.reflectiveObjects to
-        java.desktop;
     exports sun.reflect.misc to
-        java.desktop,
         java.datatransfer,
         java.management,
         java.management.rmi,
         java.rmi,
         java.sql.rowset;
     exports sun.security.action to
-        java.desktop,
         java.security.jgss,
         jdk.crypto.ec,
         jdk.incubator.foreign;
@@ -326,7 +316,6 @@ module java.base {
     exports sun.security.tools to
         jdk.jartool;
     exports sun.security.util to
-        java.desktop,
         java.naming,
         java.rmi,
         java.security.jgss,
@@ -351,11 +340,9 @@ module java.base {
     exports sun.util.cldr to
         jdk.jlink;
     exports sun.util.locale.provider to
-        java.desktop,
         jdk.jlink,
         jdk.localedata;
     exports sun.util.logging to
-        java.desktop,
         java.logging,
         java.prefs;
     exports sun.util.resources to

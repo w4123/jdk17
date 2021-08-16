@@ -41,7 +41,6 @@
 module java.se {
     requires transitive java.compiler;
     requires transitive java.datatransfer;
-    requires transitive java.desktop;
     requires transitive java.instrument;
     requires transitive java.logging;
     requires transitive java.management;

@@ -56,7 +56,6 @@ module java.management {
     exports com.sun.jmx.remote.util to
         java.management.rmi;
     exports sun.management to
-        jdk.jconsole,
         jdk.management,
         jdk.management.agent;
     exports sun.management.counter to

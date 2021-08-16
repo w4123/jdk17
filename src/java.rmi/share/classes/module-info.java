@@ -50,12 +50,10 @@ module java.rmi {
         jdk.management.agent;
     exports sun.rmi.server to
         java.management.rmi,
-        jdk.management.agent,
-        jdk.jconsole;
+        jdk.management.agent;
     exports sun.rmi.transport to
         java.management.rmi,
-        jdk.management.agent,
-        jdk.jconsole;
+        jdk.management.agent;
 
     uses java.rmi.server.RMIClassLoaderSpi;
 }

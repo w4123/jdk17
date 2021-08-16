@@ -38,8 +38,11 @@
 #include <sys/param.h>
 #include <sys/mount.h>
 #include <mach/mach.h>
-#include <sys/proc_info.h>
-#include <libproc.h>
+#include <TargetConditionals.h>
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+  #include <sys/proc_info.h>
+  #include <libproc.h>
+#endif
 #endif
 #elif !defined(_AIX)
 #include <sys/swap.h>
@@ -69,7 +72,7 @@ static jlong page_size = 0;
 
 /* This gets us the new structured proc interfaces of 5.6 & later */
 /* - see comment in <sys/procfs.h> */
-#define _STRUCTURED_PROC 1
+#define _STRUCTURED∑_PROC 1
 #include <sys/procfs.h>
 
 #endif /* _ALLBSD_SOURCE */
@@ -289,6 +292,7 @@ Java_com_sun_management_internal_OperatingSystemImpl_getOpenFileDescriptorCount0
   (JNIEnv *env, jobject mbean)
 {
 #ifdef __APPLE__
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
     // This code is influenced by the darwin lsof source
     pid_t my_pid;
     struct proc_bsdinfo bsdinfo;
@@ -332,6 +336,9 @@ Java_com_sun_management_internal_OperatingSystemImpl_getOpenFileDescriptorCount0
     free(fds);
 
     return nfiles;
+#else
+    return (100);
+#endif
 #elif defined(_ALLBSD_SOURCE)
     /*
      * XXXBSD: there's no way available to do it in FreeBSD, AFAIK.

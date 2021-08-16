@@ -33,7 +33,6 @@ module jdk.internal.jvmstat {
     exports sun.jvmstat.monitor to
         jdk.attach,
         jdk.jcmd,
-        jdk.jconsole,
         jdk.jstatd;
     exports sun.jvmstat.monitor.event to
         jdk.jcmd,
