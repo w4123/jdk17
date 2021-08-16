@@ -95,30 +95,30 @@ $(BUILD_LIBNIO): $(BUILD_LIBNET)
 ################################################################################
 # Create the macosx security library
 
-ifeq ($(call isTargetOs, macosx), true)
-
-    $(eval $(call SetupJdkLibrary, BUILD_LIBOSXSECURITY, \
-        NAME := osxsecurity, \
-        OPTIMIZATION := LOW, \
-        CFLAGS := $(CFLAGS_JDKLIB), \
-        DISABLED_WARNINGS_clang := deprecated-declarations \
-            missing-method-return-type, \
-        LDFLAGS := $(LDFLAGS_JDKLIB) \
-            -L$(SUPPORT_OUTPUTDIR)/modules_libs/java.base \
-            $(call SET_SHARED_LIBRARY_ORIGIN), \
-        LIBS := \
-            -lobjc \
-            -framework CoreServices \
-            -framework Security \
-            -framework Foundation \
-            $(JDKLIB_LIBS), \
-    ))
-
-    $(BUILD_LIBOSXSECURITY): $(BUILD_LIBJAVA)
-
-    TARGETS += $(BUILD_LIBOSXSECURITY)
-
-endif
+#ifeq ($(call isTargetOs, macosx), true)
+#
+#    $(eval $(call SetupJdkLibrary, BUILD_LIBOSXSECURITY, \
+#        NAME := osxsecurity, \
+#        OPTIMIZATION := LOW, \
+#        CFLAGS := $(CFLAGS_JDKLIB), \
+#        DISABLED_WARNINGS_clang := deprecated-declarations \
+#            missing-method-return-type, \
+#        LDFLAGS := $(LDFLAGS_JDKLIB) \
+#            -L$(SUPPORT_OUTPUTDIR)/modules_libs/java.base \
+#            $(call SET_SHARED_LIBRARY_ORIGIN), \
+#        LIBS := \
+#            -lobjc \
+#            -framework CoreServices \
+#            -framework Security \
+#            -framework Foundation \
+#            $(JDKLIB_LIBS), \
+#    ))
+#
+#    $(BUILD_LIBOSXSECURITY): $(BUILD_LIBJAVA)
+#
+#    TARGETS += $(BUILD_LIBOSXSECURITY)
+#
+#endif
 
 ################################################################################
 # Create the jsig library
