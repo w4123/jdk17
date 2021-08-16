@@ -1562,6 +1562,9 @@ static void warn_fail_commit_memory(char* addr, size_t size, bool exec,
 //       problem.
 bool os::pd_commit_memory(char* addr, size_t size, bool exec) {
   int prot = exec ? PROT_READ|PROT_WRITE|PROT_EXEC : PROT_READ|PROT_WRITE;
+#ifdef ZERO
+  prot = PROT_READ|PROT_WRITE;
+#endif
 #if defined(__OpenBSD__)
   // XXX: Work-around mmap/MAP_FIXED bug temporarily on OpenBSD
   Events::log(NULL, "Protecting memory [" INTPTR_FORMAT "," INTPTR_FORMAT "] with protection modes %x", p2i(addr), p2i(addr+size), prot);
@@ -1752,7 +1755,11 @@ bool os::protect_memory(char* addr, size_t bytes, ProtType prot,
   case MEM_PROT_NONE: p = PROT_NONE; break;
   case MEM_PROT_READ: p = PROT_READ; break;
   case MEM_PROT_RW:   p = PROT_READ|PROT_WRITE; break;
+#ifndef ZERO
   case MEM_PROT_RWX:  p = PROT_READ|PROT_WRITE|PROT_EXEC; break;
+#else
+  case MEM_PROT_RWX:  p = PROT_READ|PROT_WRITE; break;
+#endif
   default:
     ShouldNotReachHere();
   }
@@ -2419,9 +2426,11 @@ char* os::pd_map_memory(int fd, const char* file_name, size_t file_offset,
     flags = MAP_PRIVATE;
   }
 
+#ifndef ZERO
   if (allow_exec) {
     prot |= PROT_EXEC;
   }
+#endif
 
   if (addr != NULL) {
     flags |= MAP_FIXED;
