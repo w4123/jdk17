@@ -40,8 +40,14 @@
 #include "manifest_info.h"
 
 /* Support Cocoa event loop on the main thread */
-#include <Cocoa/Cocoa.h>
-#include <objc/objc-runtime.h>
+#include <TargetConditionals.h>
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+  #include <Cocoa/Cocoa.h>
+  #include <objc/objc-runtime.h>
+#else
+  #include <Foundation/Foundation.h>
+  #include <objc/runtime.h>
+#endif
 #include <objc/objc-auto.h>
 
 #include <errno.h>
