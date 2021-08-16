@@ -26,7 +26,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <objc/objc-runtime.h>
+
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+  #include <objc/objc-runtime.h>
+#else
+  #include <objc/runtime.h>
+#endif
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <SystemConfiguration/SystemConfiguration.h>
