@@ -41,7 +41,12 @@
   #include <sys/socket.h>
   #include <net/if.h>
   #include <net/if_dl.h>
-  #include <net/route.h>
+  #if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+    #include <net/route.h>
+  #else
+    // The header is not available on iOS. We assume this is true.
+    #define RTM_IFINFO2 0x12
+  #endif
 #endif
 
 static const double NANOS_PER_SEC = 1000000000.0;
