@@ -50,6 +50,7 @@
 #include "runtime/sharedRuntime.hpp"
 #include "runtime/stubRoutines.hpp"
 #include "runtime/thread.inline.hpp"
+#include "runtime/threadWXSetters.inline.hpp"
 #include "runtime/timer.hpp"
 #include "signals_posix.hpp"
 #include "utilities/events.hpp"
@@ -350,3 +351,9 @@ int os::extra_bang_size_in_bytes() {
   // Zero does not require an additional stack bang.
   return 0;
 }
+
+#if defined(__APPLE__) && defined(AARCH64)
+void os::current_thread_enable_wx(WXMode mode) {
+  
+}
+#endif
