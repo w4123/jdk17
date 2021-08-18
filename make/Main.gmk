@@ -322,16 +322,6 @@ $(eval $(call SetupTarget, vscode-project-ccls, \
 # The demos are currently linking to libjvm and libjava, just like all other
 # jdk libs, even though they don't need to. To avoid warnings, make sure they
 # aren't built until after libjava and libjvm are available to link to.
-$(eval $(call SetupTarget, demos-jdk, \
-    MAKEFILE := CompileDemos, \
-    DEPS := java.base-libs exploded-image, \
-))
-
-$(eval $(call SetupTarget, test-image-demos-jdk, \
-    MAKEFILE := CompileDemos, \
-    TARGET := images, \
-    DEPS := demos-jdk, \
-))
 
 ################################################################################
 # Jigsaw specific data and analysis targets.
@@ -399,7 +389,7 @@ $(eval $(call SetupTarget, jrtfs-jar, \
 $(eval $(call SetupTarget, jdk-image, \
     MAKEFILE := Images, \
     TARGET := jdk, \
-    DEPS := jmods zip-source demos release-file, \
+    DEPS := jmods zip-source release-file, \
 ))
 
 $(eval $(call SetupTarget, legacy-jre-image, \
